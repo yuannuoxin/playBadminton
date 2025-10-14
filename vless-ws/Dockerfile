@@ -1,7 +1,7 @@
 # 使用Alpine最新版
 FROM alpine:3.19
 
-sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 RUN apk add --no-cache bash
 RUN apk add --no-cache curl
