@@ -1,6 +1,9 @@
 # 使用Alpine最新版
 FROM alpine:3.19
 
+# 替换为阿里云镜像源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 # 安装必要工具
 RUN apk add --no-cache \
     bash \
