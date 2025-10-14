@@ -7,6 +7,10 @@ on:
         description: "Docker Hub用户名"
         required: true
         type: string
+      docker_name:
+        description: "Docker 镜像名称"
+        required: true
+        type: string
 
 jobs:
   build:
@@ -35,15 +39,7 @@ jobs:
           file: ./vless-ws/Dockerfile
           push: true
           tags: |
-            ${{ github.event.inputs.username }}/vless-ws:latest
-            ${{ github.event.inputs.username }}/vless-ws:${{ github.sha }}
-          build-args: |
-            UUID=ffffffff-ffff-ffff-ffff-ffffffffffff
-            PORT=8081
+            ${{ github.event.inputs.username }}/ ${{ github.event.inputs.docker_name }}:latest
+            ${{ github.event.inputs.username }}/ ${{ github.event.inputs.docker_name }}:${{ github.sha }}
           platforms: linux/amd64,linux/arm64
           builder: ${{ steps.buildx.outputs.name }}
-
-      - name: 更新配置模板
-        run: |
-          sed -i 's/config.json.template/config.template.json/g' ./vless-ws/gen-config.sh
-          mv ./vless-ws/config.json.template ./vless-ws/config.template.json
