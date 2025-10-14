@@ -37,10 +37,10 @@ jobs:
           tags: |
             ${{ github.event.inputs.username }}/vless-ws:latest
             ${{ github.event.inputs.username }}/vless-ws:${{ github.sha }}
-            build-args: |
+          build-args: |
             UUID=ffffffff-ffff-ffff-ffff-ffffffffffff
             PORT=8081
-            platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
           builder: ${{ steps.buildx.outputs.name }}
 
       - name: 更新配置模板
