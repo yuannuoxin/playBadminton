@@ -3,7 +3,7 @@ FROM alpine:3.19
 
 
 # 安装基础依赖
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     bash \
     curl \
     unzip \
