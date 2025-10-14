@@ -6,10 +6,11 @@ DEFAULT_UUID="ffffffff-ffff-ffff-ffff-ffffffffffff"
 DEFAULT_PORT=8081
 DEFAULT_WS_PATH="/ws"
 
-# 设置参数（环境变量可覆盖）
-: "${UUID:=$DEFAULT_UUID}"
-: "${PORT:=$DEFAULT_PORT}"
-: "${WS_PATH:=$DEFAULT_WS_PATH}"
+# 设置并导出为环境变量
+export UUID="${UUID:=$DEFAULT_UUID}"
+export PORT="${PORT:=$DEFAULT_PORT}"
+export WS_PATH="${WS_PATH:=$DEFAULT_WS_PATH}"
+
 
 # 校验函数（已验证可用）
 validate_uuid() {
@@ -43,7 +44,7 @@ fi
 envsubst < /etc/xray/config.template.json > /etc/xray/config.json
 
 # 验证配置文件
-if ! xray test -config /etc/xray/config.json >/dev/null 2>&1; then
+if ! xray -test -config /etc/xray/config.json >/dev/null 2>&1; then
     echo "❌ 生成的配置文件无效"
     cat /etc/xray/config.json
     exit 1
