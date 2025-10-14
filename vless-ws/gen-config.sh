@@ -35,18 +35,19 @@ validate_uuid "$UUID"
 validate_port "$PORT"
 
 # 校验模板文件
-if [ ! -f "/etc/xray/config.template.json" ]; then
+if [ ! -f "./config.template.json" ]; then
     echo "❌ 错误：未找到模板文件"
     exit 1
 fi
 
+cp ./config.template.json ./config.json
 # 生成配置文件
-envsubst < /etc/xray/config.template.json > /etc/xray/config.json
+sed -i "s|\\\${PORT}|${PORT}|g; s|\\\${UUID}|${UUID}|g; s|\\\${WS_PATH}|${WS_PATH}|g" ./config.json
 
 # 验证配置文件
-if ! xray -test -config /etc/xray/config.json >/dev/null 2>&1; then
+if ! ./xray -test -config ./config.json >/dev/null 2>&1; then
     echo "❌ 生成的配置文件无效"
-    cat /etc/xray/config.json
+    cat ./config.json
     exit 1
 fi
 
@@ -55,4 +56,4 @@ echo "✅ 配置验证通过"
 echo "  UUID: $UUID"
 echo "  端口: $PORT"
 echo "  路径: $WS_PATH"
-exec xray run -config /etc/xray/config.json
+exec ./xray run -config ./config.json
