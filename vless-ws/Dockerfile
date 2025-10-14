@@ -1,17 +1,21 @@
 # 使用Alpine最新版
 FROM alpine:3.19
 
-# 替换为阿里云镜像源
-# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-# 安装必要工具
+# 安装基础依赖
 RUN apk add --no-cache \
     bash \
-    xray-core \
-    libstdc++ \  # 添加C++标准库依赖
-    gettext \
     curl \
-    netcat-openbsd
+    unzip \
+    libstdc++ \
+    gettext \
+
+# 直接下载并安装Xray-core
+RUN curl -L -o xray.zip \
+    https://github.com/XTLS/Xray-core/releases/download/v25.9.11/Xray-linux-64.zip \
+    && unzip xray.zip -d /usr/local/bin/ \
+    && rm xray.zip \
+    && chmod +x /usr/local/bin/xray
 
 # 创建工作目录
 RUN mkdir -p /etc/xray
