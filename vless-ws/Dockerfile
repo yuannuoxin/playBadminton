@@ -1,15 +1,6 @@
 # 使用Alpine最新版
 FROM alpine:3.19
 
-
-# 安装基础依赖
-RUN apk update && apk add --no-cache \
-    bash \
-    curl \
-    unzip \
-    libstdc++ \
-    gettext \
-
 # 直接下载并安装Xray-core
 RUN curl -L -o xray.zip \
     https://github.com/XTLS/Xray-core/releases/download/v25.9.11/Xray-linux-64.zip \
