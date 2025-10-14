@@ -1,5 +1,7 @@
 {
-  "log": {"loglevel": "warning"},
+  "log": {
+    "loglevel": "warning"
+  },
   "dns": {
     "hosts": {
       "dns.google": [
@@ -111,25 +113,40 @@
       "https://cloudflare-dns.com/dns-query"
     ]
   },
-  "inbounds": [{
-    "port": 8081,
-    "protocol": "vless",
-    "settings": {
-      "clients": [{"id": "${UUID}"}],
-      "fallbacks": [
-        {
-          "alpn": "h2",          // 匹配HTTP/2流量
-          "dest": "https://www.bilibili.com/"  // 回落到bilibili
-        },
-        {
-          "alpn": "http/1.1",    // 备用匹配
-          "dest": "https://www.bilibili.com/"
+  "inbounds": [
+    {
+      "port": "${PORT}",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "${UUID}",
+            "flow": "none"
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "alpn": "h2",
+            "dest": "https://www.bilibili.com/"
+          },
+          {
+            "alpn": "http/1.1",
+            "dest": "https://www.bilibili.com/"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "${WS_PATH}"
         }
-      ]
-    },
-    "streamSettings": {
-      "network": "tcp",
-      "security": "tls"         // 必须启用TLS
+      }
     }
-  }]
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
 }
