@@ -42,8 +42,11 @@ if [ -n "$CONFIG_URL" ]; then
     echo "📥 正在从 $CONFIG_URL 下载配置文件..."
     if ! download_with_retry  "$CONFIG_URL" ./config.json; then
         echo "❌ 错误：无法从 $CONFIG_URL 下载配置文件"
-        cp ./config.default.json ./config.json
     fi
+fi
+
+if [ ! -f "./config.json" ]; then
+    cp ./config.default.json ./config.json
 fi
 
 # 验证配置文件
