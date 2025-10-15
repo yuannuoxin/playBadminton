@@ -1,0 +1,51 @@
+docker run -d  \
+  --name vless-ws \
+  -e UUID="85d90bb9-fc8d-409a-905a-7c5d63b44e90" \
+  -p 8081:8081 \
+  yuannuoxin/vless-ws
+
+
+  docker run -d  \
+    --name ppx \
+    -e UUID="85d90bb9-fc8d-409a-905a-7c5d63b44e90" \
+    -p 8081:8081 \
+    yuannuoxin/ppx
+
+
+docker build -t yuannuoxin/vless-ws:latest .
+
+docker exec -it vless-ws /bin/sh
+
+netstat -tulnp
+
+docker logs vless-ws
+
+docker logs -f --tail=50 vless-ws
+
+https://github.com/SagerNet/sing-box/releases/download/v1.12.10/sing-box-1.12.10-linux-amd64.tar.gz
+tar -zxvf  sing-box-1.12.10-linux-amd64.tar.gz
+https://gh.registry.cyou/SagerNet/sing-box/releases/download/v1.12.10/sing-box-1.12.10-linux-amd64.tar.gz
+
+export UUID=90a60618-980d-4c80-8e5a-eaa4f814db84
+
+
+
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+mv cloudflared-linux-amd64 cloudflared
+chmod +x cloudflared
+./cloudflared tunnel --url http://localhost:8081
+
+
+sed -i 's/github\.com/gh\.registry\.cyou/g' Dockerfile
+
+
+./xray -test -config ./config.json
+./sing-box check -c ./config.json
+./sing-box run -c ./config.json
+
+docker run -it --entrypoint sh yuannuoxin/ppx2
+
+
+
+
+
