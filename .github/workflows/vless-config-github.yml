@@ -22,6 +22,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # 👇 添加权限声明
+    permissions:
+      contents: read
+      packages: write  # 允许推送包到 ghcr.io
+
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
