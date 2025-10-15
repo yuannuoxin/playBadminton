@@ -46,6 +46,8 @@ sed -i 's/github\.com/gh\.registry\.cyou/g' Dockerfile
 
 docker run -it --entrypoint sh yuannuoxin/t2
 
+docker pull registry.cyou/yuannuoxin/helloworld
+
 
 
 
