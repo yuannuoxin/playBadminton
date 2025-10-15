@@ -1,0 +1,26 @@
+{
+  "log": {
+    "level": "debug",
+    "timestamp": true
+  },
+  "inbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-in",
+      "listen": "::",
+      "listen_port": 80,
+      "users": [
+        {
+          "name": "user1",
+          "uuid": "90a60618-980d-4c80-8e5a-eaa4f814db84",
+          "flow": ""
+        }
+      ],
+      "transport": {
+        "type": "ws",
+        "path": "/ws"
+      },
+      "tls": null
+    }
+  ]
+}
