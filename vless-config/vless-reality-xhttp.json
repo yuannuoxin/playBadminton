@@ -1,0 +1,55 @@
+{
+  "log": {
+    "loglevel": "debug"
+  },
+  "dns": {
+    "servers": [
+      "8.8.8.8"
+    ]
+  },
+  "inbounds": [
+    {
+      "tag":"xhttp-reality",
+      "listen": "::",
+      "port": 3306,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "00d1981c-d7ea-4352-b512-57b0a1dda2a1",
+            "flow": "xtls-rprx-vision"
+          }
+        ],
+        "decryption": "mlkem768x25519plus.native.600s.S84ANM2lf9UQsyKI97GMwI_Sx16-p6oxe8RupLMeJrl-kslIVS3if01S_u3RbyGuprg3GsnmfUUQLTrhupF-6A"
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "reality",
+        "realitySettings": {
+          "fingerprint": "chrome",
+          "target": "apple.com:443",
+          "serverNames": [
+            "apple.com"
+          ],
+          "privateKey": "2Pzxp_2qUpPwh53Ub_GxCHPw23QE3D-fuGTmLyCJiFA",
+          "shortIds": ["b01678a2"]
+        },
+        "xhttpSettings": {
+          "host": "",
+          "path": "ws",
+          "mode": "auto"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"],
+        "metadataOnly": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}

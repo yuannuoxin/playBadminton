@@ -1,0 +1,40 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "dns": {
+    "servers": [
+      "1.1.1.1",
+      "8.8.8.8",
+      "2606:4700:4700::1111",
+      "2001:4860:4860::8888"
+    ]
+  },
+  "inbounds": [
+    {
+      "listen": "::",
+      "port": "80",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "00d1981c-d7ea-4352-b512-57b0a1dda2a1",
+            "flow": "none"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "path": "/ws"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}

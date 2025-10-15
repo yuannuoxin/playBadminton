@@ -13,6 +13,8 @@ docker run -d  \
 
   docker run -d  -e CONFIG_URL="https://cf-workers-text2kv-13t.pages.dev/vless-ws.config.json?token=auto"  -p 8081:80  --name t2  yuannuoxin/t2
 
+  docker run -d  -e xhpt=3306   --name t3  ygkkk/argosbx
+
 docker build -t yuannuoxin/vless-ws:latest .
 
 docker exec -it vless-ws /bin/sh
@@ -28,6 +30,7 @@ tar -zxvf  sing-box-1.12.10-linux-amd64.tar.gz
 https://gh.registry.cyou/SagerNet/sing-box/releases/download/v1.12.10/sing-box-1.12.10-linux-amd64.tar.gz
 
 export UUID=90a60618-980d-4c80-8e5a-eaa4f814db84
+echo $UUID
 
 
 
