@@ -1,4 +1,4 @@
-name: 构建vless-ws
+name: 构建vless-config
 
 on:
   workflow_dispatch:
