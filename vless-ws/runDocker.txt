@@ -11,6 +11,7 @@ docker run -d  \
     -p 8081:8081 \
     yuannuoxin/ppx
 
+  docker run -d  -e CONFIG_URL="https://cf-workers-text2kv-13t.pages.dev/vless-ws.config.json?token=auto"  -p 8081:80  --name t2  yuannuoxin/t2
 
 docker build -t yuannuoxin/vless-ws:latest .
 
@@ -43,7 +44,7 @@ sed -i 's/github\.com/gh\.registry\.cyou/g' Dockerfile
 ./sing-box check -c ./config.json
 ./sing-box run -c ./config.json
 
-docker run -it --entrypoint sh yuannuoxin/ppx2
+docker run -it --entrypoint sh yuannuoxin/t2
 
 
 
