@@ -21,7 +21,7 @@ download_with_retry() {
 
     echo "📥 正在从 $url 下载配置文件... $output_file"
 
-    until wget -qL -O "$output_file" "$url" 2>/dev/null; do
+    until wget  -O "$output_file" "$url" 2>/dev/null; do
         retry_count=$((retry_count + 1))
         if [ $retry_count -lt $max_retries ]; then
             echo "⚠️  下载失败，正在重试... ($retry_count/$max_retries)"
